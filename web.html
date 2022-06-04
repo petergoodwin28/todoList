@@ -1,0 +1,64 @@
+<!doctype <!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>ToDoList</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="look.css">
+    </head>
+    <body>
+        <strong><h1>To Do List</h1></strong>
+
+        <!-- Form to accept input -->
+        <form position: sticky; top: 20px;>
+            <label for="todo"><strong>To Do:</strong></label>
+            <input type="text" id="todo" name="todo"><br>
+            <input type="submit" value="Add to List">
+        </form>
+
+        <!-- Expiremental Box-->
+        <div class="box" id="one">You Can Do it!</div>
+
+        <div style="position: relative;background-color:aliceblue; width: 600px; height: 800px;">    
+            <!-- where todos are appended-->
+            <ul id="todos"></ul>
+            <div style="position: absolute; bottom: 5px">
+            Get To Work!
+            </div>
+        </div>
+
+        <script>
+
+            const form = document.querySelector('form');
+            const input = document.querySelector("[name='todo']");
+            const todoList = document.getElementById('todos');
+
+            const todoData = []
+
+            // Adds todo to local storage and appends to html list
+            function addTodo(todoText){
+                todoData.push(todoText);
+                const li = document.createElement('li')
+                li.innerHTML = todoText;
+                todoList.appendChild(li);
+                localStorage.setItem('todos', JSON.stringify(todoData));
+
+            }
+        
+            form.onsubmit = (event) => {
+                // Prevents browser from reloading
+               event.preventDefault();
+               // Make sure they are actually adding a value
+               if (input.value != ""){
+                  addTodo(input.value); 
+                  input.value = "";
+
+               }
+               
+            }
+
+        </script>
+    </body>
+</html>
